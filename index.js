@@ -11,7 +11,7 @@
     8. Mensalidade(Gerar, Quita, Cancelar, Desconto)
 */
 
-fetch(`https://apiexample.com/${unidade}/json/`)
+fetch(`https://apiexample.com/unidades/`)
             .then(response => response.json())
             .then(data => {
                 console.log(data);
