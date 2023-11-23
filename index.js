@@ -21,6 +21,10 @@ fetch(`https://apiexample.com/unidades/`)
                 console.error(error);
             });
 
+
+
+
+            
 // Array para armazenar usuários cadastrados
 let usuarios = [];
 

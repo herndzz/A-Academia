@@ -1,11 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="shortcut icon" href="img/logo-academia.png" type="image/x-icon"> <!-- Logo -->
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="./css/index.css">
+
+  <!-- Scripts -->
+
+  <title>Backend Academia - Trabalho Neto</title>
 </head>
 <body>
-    
+  <div class="nav" id="nav">
+    <a href="index.html"><img src="img/logo-academia.png" alt="logo" width="64px" height="64"></a>
+    <span class="logo-name">A ACADEMIA</span>
+  </div>
+  <div class="main">
+    <div class="form-container">
+      <div class="form-wrapper">
+        <h1 class="card-title">A ACADEMIA</h1>
+        <!-- Inputs para escolher qual ação realizar-->
+        <div class="option-Radios">
+          <h2>Escolha uma Ação:</h2>
+          <div class="optionContainer">
+            <input type="radio" name="optionRadios" id="optionRadio1" value="radioCreate">
+            <label for="optionRadio1">Cadastrar</label>
+            <input type="radio" name="optionRadios" id="optionRadio2" value="radioRead">
+            <label for="optionRadio2">Pesquisar</label>
+            <input type="radio" name="optionRadios" id="optionRadio3" value="radioUpdate">
+            <label for="optionRadio3">Atualiazar</label>
+            <input type="radio" name="optionRadios" id="optionRadio4" value="radioDelete">
+            <label for="optionRadio4">Deletar</label>
+          </div>
+        </div>
+        <!-- Input para as Informações onde será consultado-->
+        <label for="informatiuon">Onde:</label>
+        <select id="infoOptions" name="infoSelect" required>
+          <option value="Atividade" selected>Atividade</option>
+          <option value="Aluno">Aluno</option>
+          <option value="Unidade">Unidade</option>
+          <option value="Matricula">Matrícula</option>
+          <option value="Mensalidade">Mensalidade</option>
+          <option value="Pessoa">Pessoa</option>
+          <option value="Professor">Professor</option>
+          <option value="Turma">Turma</option>
+        </select>
+        <div class="inputUnit">
+          <label for="cnpjUni">CNPJ:</label>
+          <input type="text" name="cnpjUni" id="cnpjUni">
+          
+          <label for="nomeUni">Nome:</label>
+          <input type="text" name="nomeUni" id="nomeUni">
+          
+          <label for="razaoUni">Razão Social:</label>
+          <input type="text" name="razaoUni" id="razaoUni">
+          
+          <label for="enderecoUni">Endereço:</label>
+          <input type="text" name="enderecoUni" id="enderecoUni">
+          
+          <label for="bairroUni">Bairro:</label>
+          <input type="text" name="bairroUni" id="bairroUni">
+          
+          <label for="cepUni">CEP:</label>
+          <input type="text" name="cepUni" id="cepUni">
+          
+          <label for="telUni">Telefone:</label>
+          <input type="text" name="telUni" id="cnpjUnidade">
+          
+          <label for="emailUni">E-mail:</label>
+          <input type="text" name="emailUni" id="emailUni">
+        </div>
+        <div>
+          <button onclick="buscarCEP()">Buscar</button>
+          <button onclick="limparInput()">Limpar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="resultado">
+    <!-- Os resultados da busca serão exibidos aqui -->
+  </div>
+  <footer class="footer">
+    <p>®2023 A ACADEMIA. Todos os direitos reservados.</p>
+    <a href="#nav">Voltar ao Topo</a>
+  </footer>
 </body>
 </html>
