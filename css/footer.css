@@ -1,0 +1,36 @@
+:root {
+    --primary-color: #1E1930;
+    --secondary-color: #FFFF00; 
+    --third-color: #3D475E;
+    --fourth-color: #CFD8ED;
+}
+
+/* Footer */
+.footer {
+    background-color: var(--primary-color);
+    color: var(--fourth-color);
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 15vh;
+    flex-direction: column;
+}
+
+.footer p {
+    margin: 0;
+    text-align: center;
+}
+
+.footer a {
+    text-decoration: none;
+    text-transform: uppercase;
+    color: var(--fourth-color);
+    transition: .2s;
+    margin: .5em;
+}
+
+.footer a:hover {
+    color: white;
+    transition: .2s;
+}

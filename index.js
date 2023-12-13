@@ -1,71 +1,25 @@
-/*
-    Principais Requisições:
+// import axios from "axios";
 
-    1. Unidade(Cadastrar(), Desativar(), Atualizar())
-    2. Turma(Cadastrar(), Cancelar())
-    3. Professor(Cadastrar(), Desativar(), Atualizar())
-    4. Matrícula(Realizar(), Cancelar(), Atualizar())
-    5. Aluno((Cadastrar(), Desativar(), Atualizar()))
-    6. Atividade(Cadastrar(), Desativar(), Atualizar())
-    7. Pessoa
-    8. Mensalidade(Gerar, Quita, Cancelar, Desconto)
-*/
+// Funções de Busca
+async function fetchData() {
+    try {
+        const response = await axios.get('http://localhost:3333/atividades/');
 
-fetch(`https://apiexample.com/unidades/`)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-            })
-            .catch(error => {
-                document.getElementById('resultado').innerHTML = 'CEP não encontrado ou erro na busca.'
-                console.error(error);
-            });
-
-
-
-
-            
-// Array para armazenar usuários cadastrados
-let usuarios = [];
-
-function cadastrarUsuario() {
-    const nome = prompt('Digite seu nome:');
-    const email = prompt('Digite seu email:');
-    const senha = prompt('Digite sua senha:');
-
-    // Verifica se o email já está cadastrado
-    const usuarioExistente = usuarios.find(u => u.email === email);
-    if (usuarioExistente) {
-        alert('Usuário com este email já cadastrado. Por favor, tente novamente.');
-        return;
-    }
-
-    // Cria um objeto de usuário
-    const novoUsuario = {
-        nome,
-        email,
-        senha
-    };
-
-    // Adiciona o usuário ao array
-    usuarios.push(novoUsuario);
-
-    alert('Cadastro realizado com sucesso!');
-}
-
-function fazerLogin() {
-    const email = prompt('Digite seu email:');
-    const senha = prompt('Digite sua senha:');
-
-    // Verifica se o usuário existe
-    const usuario = usuarios.find(u => u.email === email && u.senha === senha);
-    if (usuario) {
-        alert(`Bem-vindo, ${usuario.nome}!`);
-    } else {
-        alert('Email ou senha incorretos. Por favor, tente novamente.');
+        // Verifica se a resposta foi bem-sucedida (código de status 2xx)
+        if (response.status === 200) {
+            console.log('Dados recebidos:', response.data);
+        } else {
+            console.error('Erro na requisição:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Erro na requisição:', error.message);
     }
 }
 
-// Exemplo de utilização do cadastro e login
-cadastrarUsuario();
-fazerLogin();
+fetchData()
+
+
+
+
+
+

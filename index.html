@@ -9,6 +9,9 @@
   <link rel="stylesheet" href="./css/index.css">
 
   <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js" defer></script>
+  <script src="js/eventListeners.js" type="module" defer></script>
+  <script src="index.js" type="module" defer></script>
 
   <title>Backend Academia - Trabalho Neto</title>
 </head>
@@ -25,57 +28,158 @@
         <div class="option-Radios">
           <h2>Escolha uma Ação:</h2>
           <div class="optionContainer">
-            <input type="radio" name="optionRadios" id="optionRadio1" value="radioCreate">
-            <label for="optionRadio1">Cadastrar</label>
-            <input type="radio" name="optionRadios" id="optionRadio2" value="radioRead">
-            <label for="optionRadio2">Pesquisar</label>
-            <input type="radio" name="optionRadios" id="optionRadio3" value="radioUpdate">
-            <label for="optionRadio3">Atualiazar</label>
-            <input type="radio" name="optionRadios" id="optionRadio4" value="radioDelete">
-            <label for="optionRadio4">Deletar</label>
+            <select name="crudActions" id="crudActions">
+              <option value="cadastrar">Cadastrar</option>
+              <option value="buscar">Buscar</option>
+              <!-- <option value="atualizar">Atualizar</option> -->
+              <option value="deletar">Deletar</option>
+            </select>
           </div>
         </div>
         <!-- Input para as Informações onde será consultado-->
-        <label for="informatiuon">Onde:</label>
-        <select id="infoOptions" name="infoSelect" required>
-          <option value="Atividade" selected>Atividade</option>
-          <option value="Aluno">Aluno</option>
-          <option value="Unidade">Unidade</option>
-          <option value="Matricula">Matrícula</option>
-          <option value="Mensalidade">Mensalidade</option>
-          <option value="Pessoa">Pessoa</option>
-          <option value="Professor">Professor</option>
-          <option value="Turma">Turma</option>
+        <label for="tableOptions">Onde Realizar:</label>
+        <select id="tableOptions" name="tableOptions">
+          <option value="aluno" selected>Aluno</option>
+          <option value="atividade">Atividade</option>
+          <option value="matricula">Matrícula</option>
+          <option value="mensalidade">Mensalidade</option>
+          <option value="pessoa">Pessoa</option>
+          <option value="professor">Professor</option>
+          <option value="turma">Turma</option>
+          <option value="unidade">Unidade</option>
         </select>
-        <div class="inputUnit">
-          <label for="cnpjUni">CNPJ:</label>
-          <input type="text" name="cnpjUni" id="cnpjUni">
-          
-          <label for="nomeUni">Nome:</label>
-          <input type="text" name="nomeUni" id="nomeUni">
-          
-          <label for="razaoUni">Razão Social:</label>
-          <input type="text" name="razaoUni" id="razaoUni">
-          
-          <label for="enderecoUni">Endereço:</label>
-          <input type="text" name="enderecoUni" id="enderecoUni">
-          
-          <label for="bairroUni">Bairro:</label>
-          <input type="text" name="bairroUni" id="bairroUni">
-          
-          <label for="cepUni">CEP:</label>
-          <input type="text" name="cepUni" id="cepUni">
-          
-          <label for="telUni">Telefone:</label>
-          <input type="text" name="telUni" id="cnpjUnidade">
-          
-          <label for="emailUni">E-mail:</label>
-          <input type="text" name="emailUni" id="emailUni">
+        <div class="inputsBox" id="inputPK">
+          <label for="inputForSearch">Valor de Busca:</label>
+          <input type="text" name="inputForSearch" id="inputForSearch" placeholder="CPF, CNPJ, CREF ou Código Especial">
+          <div class="checkboxShow" style="display: flex; align-items: center;">
+            <input type="checkbox" name="checkboxFetchAll" id="checkboxFetchAll">
+            <label for="checkboxFetchAll" style="text-align: center;">Buscar Todos os Dados</label>
+          </div>
         </div>
-        <div>
-          <button onclick="buscarCEP()">Buscar</button>
-          <button onclick="limparInput()">Limpar</button>
+        <div class="inputsBox" id="inputsAluno">
+          <label for="cpfAluno">CPF:</label>
+          <input type="number" name="cpfAluno" id="cpfAluno">
+          
+          <label for="nomeAluno">Nome:</label>
+          <input type="text" name="nomeAluno" id="nomeAluno">
+          
+          <label for="enderecoAluno">Endereço:</label>
+          <input type="text" name="enderecoAluno" id="enderecoAluno">
+          
+          <label for="cepAluno">CEP:</label>
+          <input type="text" name="cepAluno" id="cepAluno">
+          
+          <label for="telAluno">Telefone:</label>
+          <input type="tel" name="telAluno" id="telAluno">
+          
+          <label for="celAluno">Celular:</label>
+          <input type="tel" name="celAluno" id="celAluno">
+          
+          <label for="emailAluno">Email:</label>
+          <input type="text" name="emailAluno" id="emailAluno">
+          
+          <label for="dataNascAluno">Data de Nascimento:</label>
+          <input type="date" name="dataNascAluno" id="dataNascAluno">
+
+          <label for="sexAluno">Sexo:</label>
+          <input type="text" name="sexAluno" id="sexAluno">
         </div>
+        <div class="inputsBox" id="inputsAtividade">
+          <label for="codAtividade">Código da Atividade:</label>
+          <input type="text" name="codAtividade" id="codAtividade">
+          
+          <label for="tipAtividade">Tipo Atividade:</label>
+          <input type="text" name="tipAtividade" id="tipAtividade">
+          
+          <label for="nomeAtividade">Nome Atividade:</label>
+          <input type="text" name="nomeAtividade" id="nomeAtividade">
+        </div>
+        <div class="inputsBox" id="inputsMatricula">
+          <label for="codMatricula">Código da Matrícula:</label>
+          <input type="text" name="codMatricula" id="codMatricula">
+          
+          <label for="dataMatricula">Data Matrícula:</label>
+          <input type="date" name="dataMatricula" id="dataMatricula">
+        </div>
+        <div class="inputsBox" id="inputsMensalidade">
+          <label for="codMensalidade">Código da Mensalidade:</label>
+          <input type="text" name="codMensalidade" id="codMensalidade">
+          
+          <label for="dataVencMensalidade">Data de Vencimento:</label>
+          <input type="date" name="dataVencMatricula" id="dataVencMensalidade">
+
+          <label for="valorMensalidade">Valor:</label>
+          <input type="number" name="vencMensalidade" id="valorMensalidade">
+          
+          <label for="situacaoMensalidade">Situação Mensalidade:</label>
+          <input type="text" name="situacaoMensalidade" id="situacaoMensalidade">
+        </div>
+        <div class="inputsBox" id="inputsPessoa">
+          <label for="cpfPessoa">CPF:</label>
+          <input type="number" name="cpfPessoa" id="cpfPessoa">
+          
+          <label for="nomePessoa">Nome:</label>
+          <input type="text" name="nomePessoa" id="nomePessoa">
+          
+          <label for="enderecoPessoa">Endereço:</label>
+          <input type="text" name="enderecoPessoa" id="enderecoPessoa">
+          
+          <label for="cepPessoa">CEP:</label>
+          <input type="text" name="cepPessoa" id="cepPessoa">
+          
+          <label for="telPessoa">Telefone:</label>
+          <input type="tel" name="telPessoa" id="telPessoa">
+          
+          <label for="celPessoa">Celular:</label>
+          <input type="tel" name="celPessoa" id="celPessoa">
+          
+          <label for="emailPessoa">Email:</label>
+          <input type="email" name="emailPessoa" id="emailPessoa">
+          
+          <label for="dataNascPessoa">Data de Nascimento:</label>
+          <input type="date" name="dataNascPessoa" id="dataNascPessoa">
+
+          <label for="sexPessoa">Sexo:</label>
+          <input type="text" name="sexPessoa" id="sexPessoa">
+        </div>
+        <div class="inputsBox" id="inputsProfessor">
+          <label for="crefProf">CREF:</label>
+          <input type="text" name="crefProf" id="crefProf">
+          
+          <label for="remuneracaoProf">Remuneração:</label>
+          <input type="text" name="remuneracaoProf" id="remuneracaoProf">
+
+          <label for="dataInicioProf">Data de Início:</label>
+          <input type="date" name="dataInicioProf" id="dataInicioProf">
+        </div>
+        <div class="inputsBox" id="inputsTurma">
+          <label for="codTurma">Código Turma:</label>
+          <input type="text" name="codTurma" id="codTurma">
+          
+          <label for="horarioTurma">Horário:</label>
+          <input type="text" name="horarioTurma" id="horarioTurma">
+
+          <label for="AulaSemanaTurma">Aulas por Semana:</label>
+          <input type="text" name="AulaSemanaTurma" id="AulaSemanaTurma">
+
+          <label for="capacidadeTurma">Capacidade:</label>
+          <input type="text" name="capacidadeTurma" id="capacidadeTurma">
+        </div>
+        <div class="inputsBox" id="inputsUnidade">
+          <label for="cnpjUnidade">CNPJ:</label>
+          <input type="text" name="cnpjUnidade" id="cnpjUnidade">
+          
+          <label for="nomeUnidade">Nome:</label>
+          <input type="text" name="nomeUnidade" id="nomeUnidade">
+
+          <label for="enderecoUnidade">Endereço:</label>
+          <input type="text" name="enderecoUnidade" id="enderecoUnidade">
+        </div>
+      </div>
+      <div>
+        <button id="btnExecutar">Executar</button>
+        <button id="btnLimpar">Limpar</button>
+        <button id="btnLimparResulatdo">Limpar R.</button>
       </div>
     </div>
   </div>
